@@ -149,23 +149,28 @@ sudo certbot certonly \
 
 ```
 
-### Create the usable Cert and key pair:
+### Install ACL Tools:
 
 ```
-sudo openssl ec -in /etc/letsencrypt/live/gitea.[YOUR.DOMAIN !!!]/privkey.pem -out ~/gitea/cert/privkey.pem
-
-sudo openssl x509 -in /etc/letsencrypt/live/gitea.[YOUR.DOMAIN !!!]/fullchain.pem -out ~/gitea/cert/fullchain.pem
+sudo apt install acl
 
 ```
 
-### Give yourself ownership of the new pair:
+### Set Permissions for key files
 
 ```
-sudo chown $USER:$USER ~/gitea/cert/*
+# Make sure that the value below: 'u:1000' matches the one seen in the output of the command: `id -u`
+
+# This sets permissions on the files that already exist
+sudo setfacl -R -m u:1000:rX /etc/letsencrypt/
+
+# This sets default permissions for future files (critical for renewals)
+sudo setfacl -dR -m u:1000:rX /etc/letsencrypt/
+
 
 ```
 
-3. Create the compose.yml file:
+### Create the compose.yml file:
 
 ```
 nano ~/gitea/compose.yml
@@ -190,7 +195,8 @@ services:
       - gitea-net
     volumes:
       - ./gitea:/data
-      - ./cert:/cert:ro
+      # Mounts the host's standard Certbot directory (read-only)
+      - /etc/letsencrypt:/etc/letsencrypt:ro
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     ports:
@@ -213,8 +219,9 @@ services:
  #    - GITEA__webhook__ALLOWED_HOST_LIST=[UNCOMMENT AND REPLACE THIS PLACEHOLDER WITH AN IP ADDRESS TO ALLOW WEBHOOKS WITH A SERVICE SUCH AS JENKINS ON A LOCAL IP!!!]
       - GITEA__server__PROTOCOL=https
       - GITEA__server__ROOT_URL=https://gitea.[YOUR.DOMAIN !!!]
-      - GITEA__server__CERT_FILE=/cert/fullchain.pem
-      - GITEA__server__KEY_FILE=/cert/privkey.pem
+      - GITEA__server__CERT_FILE=/etc/letsencrypt/live/gitea.[YOUR.DOMAIN !!!]/fullchain.pem
+      - GITEA__server__KEY_FILE=/etc/letsencrypt/live/gitea.[YOUR.DOMAIN !!!]/privkey.pem
+
   db:
     image: postgres:15
     container_name: gitea-db
