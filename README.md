@@ -60,10 +60,6 @@ services:
       - db
     environment:
       # These variables pre-configure the database connection
-      - GITEA__server__START_SSH_SERVER=true
-      - GITEA__server__SSH_DOMAIN=[IP ADDRESS OR DOMAIN NAME !!!]
-      - GITEA__server__SSH_PORT=2222
-      - GITEA__server__SSH_LISTEN_PORT=22
       - GITEA__database__DB_TYPE=postgres
       - GITEA__database__HOST=db:5432
       - GITEA__database__NAME=gitea
@@ -214,10 +210,6 @@ services:
       - USER_UID=1000
       - USER_GID=1000
       # These variables pre-configure the database connection
-      - GITEA__server__START_SSH_SERVER=true
-      - GITEA__server__SSH_DOMAIN=gitea.[YOUR.DOMAIN]
-      - GITEA__server__SSH_PORT=2222
-      - GITEA__server__SSH_LISTEN_PORT=22
       - GITEA__database__DB_TYPE=postgres
       - GITEA__database__HOST=db:5432
       - GITEA__database__NAME=gitea
