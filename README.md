@@ -17,14 +17,14 @@ sudo usermod -aG docker ${USER}
 
 ### Ready the environment
 
-1. Create the Directory: 
+Create the Directory: 
 
 ```
 mkdir ~/gitea
 cd ~/gitea
 
 ```
-2. Create the compose.yml file:
+Create the compose.yml file:
 
 ```
 nano ~/gitea/compose.yml
@@ -102,7 +102,7 @@ sudo usermod -aG docker ${USER}
 
 ### Ready the environment
 
-1. Create the Directory: 
+Create the Directory: 
 
 ```
 mkdir ~/gitea
@@ -110,7 +110,6 @@ mkdir ~/gitea/cert
 cd ~/gitea
 
 ```
-2. prepare the certificate for HTTPS:
 
 ### install OpenSSL and Certbot with its Cloudflare plugin:
 
