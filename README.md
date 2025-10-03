@@ -195,7 +195,6 @@ services:
       - gitea-net
     volumes:
       - ./gitea:/data
-      # Mounts the host's standard Certbot directory (read-only)
       - /etc/letsencrypt:/etc/letsencrypt:ro
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
@@ -207,7 +206,7 @@ services:
     depends_on:
       - db
     environment:
-      # IMPORTANT: Use `id -u` and `id -g` to find your correct values (ON A FRESH SYSTEM THESE VALUES WILL WORK)
+      # IMPORTANT: Use `id -u` and `id -g` to find your correct values
       - USER_UID=1000
       - USER_GID=1000
       # These variables pre-configure the database connection
@@ -216,11 +215,11 @@ services:
       - GITEA__database__NAME=gitea
       - GITEA__database__USER=gitea
       - GITEA__database__PASSWD=[CHOOSE A PASSWORD !!!]
- #    - GITEA__webhook__ALLOWED_HOST_LIST=[UNCOMMENT AND REPLACE THIS PLACEHOLDER WITH AN IP ADDRESS TO ALLOW WEBHOOKS WITH A SERVICE SUCH AS JENKINS ON A LOCAL IP!!!]
+      - GITEA__webhook__ALLOWED_HOST_LIST=[UNCOMMENT AND REPLACE THIS PLACEHOLDER WITH AN IP ADDRESS TO ALLOW WEBHOOKS WITH A SERVICE SUCH AS JENKINS ON A LOCAL IP !!!]
       - GITEA__server__PROTOCOL=https
-      - GITEA__server__ROOT_URL=https://gitea.[YOUR.DOMAIN !!!]
-      - GITEA__server__CERT_FILE=/etc/letsencrypt/live/gitea.[YOUR.DOMAIN !!!]/fullchain.pem
-      - GITEA__server__KEY_FILE=/etc/letsencrypt/live/gitea.[YOUR.DOMAIN !!!]/privkey.pem
+      - GITEA__server__ROOT_URL=https://gitea.[YOUR.DOMAIN !!!!]
+      - GITEA__server__CERT_FILE=/etc/letsencrypt/live/gitea.[YOUR.DOMAIN !!!!]/fullchain.pem
+      - GITEA__server__KEY_FILE=/etc/letsencrypt/live/gitea.[YOUR.DOMAIN !!!!]/privkey.pem
 
   db:
     image: postgres:15
@@ -234,9 +233,7 @@ services:
     environment:
       - POSTGRES_USER=gitea
       - POSTGRES_DB=gitea
-      - POSTGRES_PASSWORD=[THE PASSWORD YOU CHOSE IN THE PREVIOUS ENVIRONMENT KEY !!!]
-
-
+      - POSTGRES_PASSWORD=[USE THE PASSWORD DEFINED IN THE FORMER PASSWORD FIELD !!!]
 ```
 
 ### Go to the GUI using your domain to complete setup:
