@@ -82,7 +82,7 @@ services:
       - POSTGRES_PASSWORD=[THE PASSWORD YOU CHOSE IN THE PREVIOUS ENVIRONMENT KEY !!!]
 
 ```
-### Navigate to `http://[GITEA IP/URL]:3000` to complete the setup.
+#### Navigate to `http://[GITEA IP/URL]:3000` to complete the setup.
 
 
 ## TRUSTED HTTPS with Cloudflare installation:
