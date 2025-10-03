@@ -8,7 +8,7 @@
 https://docs.docker.com/engine/install/ubuntu/
 
 ```
-add your user to the Docker group:
+### add your user to the Docker group:
 
 ```
 sudo usermod -aG docker ${USER}
@@ -17,14 +17,14 @@ sudo usermod -aG docker ${USER}
 
 ### Ready the environment
 
-Create the Directory: 
+#### Create the Directory: 
 
 ```
 mkdir ~/gitea
 cd ~/gitea
 
 ```
-Create the compose.yml file:
+#### Create the compose.yml file:
 
 ```
 nano ~/gitea/compose.yml
@@ -100,9 +100,9 @@ sudo usermod -aG docker ${USER}
 
 ```
 
-### Ready the environment
+### Ready the environment:
 
-Create the Directory: 
+#### Create the Directory: 
 
 ```
 mkdir ~/gitea
@@ -111,7 +111,7 @@ cd ~/gitea
 
 ```
 
-### install OpenSSL and Certbot with its Cloudflare plugin:
+#### install OpenSSL and Certbot with its Cloudflare plugin:
 
 ```
 sudo apt install openssl
@@ -119,25 +119,25 @@ sudo apt install certbot python3-certbot-dns-cloudflare
 
 ```
 
-### Get your API key from Cloudflare's website:
+#### Get your API key from Cloudflare's website:
 
 My Profile > API Tokens > Create Token > Edit zone DNS template > zone resource = your.domain > continue & create
 
-### store the Cloudflare API key on the Gitea server using this command:
+#### store the Cloudflare API key on the Gitea server using this command:
 
 ```
 echo -e "dns_cloudflare_api_token = [PLACEHOLDER FOR YOUR API TOKEN !!!]" | sudo tee -a ~/gitea/cert/cloudflare.ini
 
 ```
 
-### Secure the token:
+#### Secure the token:
 
 ```
 sudo chmod -R 600 ~/gitea/cert
 
 ```
 
-### Request the certificate:
+#### Request the certificate:
 
 ```
 sudo certbot certonly \
@@ -149,14 +149,14 @@ sudo certbot certonly \
 
 ```
 
-### Install ACL Tools:
+#### Install ACL Tools:
 
 ```
 sudo apt install acl
 
 ```
 
-### Set Permissions for key files
+#### Set Permissions for key files
 
 ```
 # Make sure that the value below: 'u:1000' matches the one seen in the output of the command: `id -u`
@@ -170,7 +170,7 @@ sudo setfacl -dR -m u:1000:rX /etc/letsencrypt/
 
 ```
 
-### Create the compose.yml file:
+#### Create the compose.yml file:
 
 ```
 nano ~/gitea/compose.yml
