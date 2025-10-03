@@ -85,7 +85,7 @@ services:
 #### Navigate to `http://[GITEA IP/URL]:3000` to complete the setup.
 
 
-## TRUSTED HTTPS with Cloudflare installation:
+## Trusted HTTPS with Cloudflare installation:
 
 ### Install Docker using their guide: 
 
